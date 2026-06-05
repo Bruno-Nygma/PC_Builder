@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS Account(
 	password VARCHAR(200) NOT NULL,
 	role VARCHAR(20) NOT NULL DEFAULT 'user'
 );
-
+	
 CREATE TABLE IF NOT EXISTS Build(
 	id_build SERIAL PRIMARY KEY,
 	id_account INT NOT NULL,
@@ -16,7 +16,10 @@ CREATE TABLE IF NOT EXISTS Build(
 
 CREATE TABLE IF NOT EXISTS Component(
 	id_component SERIAL PRIMARY KEY,
-	price NUMERIC(6,2) NOT NULL
+	price NUMERIC(6,2) NOT NULL,
+	manufacturer VARCHAR(50) NOT NULL,
+	model VARCHAR(50) NOT NULL,
+	"type" VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Includes(
@@ -30,8 +33,6 @@ CREATE TABLE IF NOT EXISTS Includes(
 
 CREATE TABLE IF NOT EXISTS Cpu_cooler(
 	id_component INT PRIMARY KEY,
-	manufacturer VARCHAR(50) NOT NULL,
-	model VARCHAR(50) NOT NULL,
 	fan_rpm INT NOT NULL,
 	water_cooled BOOL NOT NULL,
 	FOREIGN KEY (id_component) REFERENCES Component(id_component)
@@ -39,13 +40,11 @@ CREATE TABLE IF NOT EXISTS Cpu_cooler(
 
 CREATE TABLE IF NOT EXISTS Form_factor(
 	id_form_factor SERIAL PRIMARY KEY,
-	type VARCHAR(15)
+	type VARCHAR(15) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Tower_case(
 	id_component INT PRIMARY KEY,
-	manufacturer VARCHAR(50) NOT NULL,
-	model VARCHAR(50) NOT NULL,
 	type VARCHAR(20) NOT NULL,
 	max_video_card_length INT NOT NULL,
 	FOREIGN KEY (id_component) REFERENCES Component(id_component)
@@ -61,43 +60,33 @@ CREATE TABLE IF NOT EXISTS Compatible_with(
 
 CREATE TABLE IF NOT EXISTS Psu(
 	id_component INT PRIMARY KEY,
-	manufacturer VARCHAR(50) NOT NULL,
-	model VARCHAR(50) NOT NULL,
 	wattage INT NOT NULL,
 	FOREIGN KEY (id_component) REFERENCES Component(id_component)
 );
 
 CREATE TABLE IF NOT EXISTS Storage(
 	id_component INT PRIMARY KEY,
-	manufacturer VARCHAR(50) NOT NULL,
-	model VARCHAR(50) NOT NULL,
 	capacity VARCHAR(10) NOT NULL,
-	type VARCHAR(10),
+	type VARCHAR(10) NOT NULL,
 	FOREIGN KEY (id_component) REFERENCES Component(id_component)
 );
 
 CREATE TABLE IF NOT EXISTS Gpu(
 	id_component INT PRIMARY KEY,
-	manufacturer VARCHAR(50) NOT NULL,
-	model VARCHAR(50) NOT NULL,
 	tdp INT NOT NULL,
-	VRAM VARCHAR NOT NULL,
+	VRAM INT NOT NULL,
 	FOREIGN KEY (id_component) REFERENCES Component(id_component)
 );
 
 CREATE TABLE IF NOT EXISTS Memory(
 	id_component INT PRIMARY KEY,
-	manufacturer VARCHAR(50) NOT NULL,
-	model VARCHAR(50) NOT NULL,
 	form_factor VARCHAR(20) NOT NULL,
-	speed VARCHAR(10) NOT NULL,
+	speed INT NOT NULL,
 	FOREIGN KEY (id_component) REFERENCES Component(id_component)
 );
 
 CREATE TABLE IF NOT EXISTS Cpu(
 	id_component INT PRIMARY KEY,
-	manufacturer VARCHAR(50) NOT NULL,
-	model VARCHAR(50) NOT NULL,
 	clock VARCHAR(20) NOT NULL,
 	integrated_graphics BOOL NOT NULL,
 	tdp INT NOT NULL,
@@ -107,8 +96,6 @@ CREATE TABLE IF NOT EXISTS Cpu(
 
 CREATE TABLE IF NOT EXISTS Mobo(
 	id_component INT PRIMARY KEY,
-	manufacturer VARCHAR(50) NOT NULL,
-	model VARCHAR(50) NOT NULL,
 	form_factor VARCHAR(20) NOT NULL,
 	socket VARCHAR(10) NOT NULL,
 	chipset VARCHAR(10) NOT NULL,

@@ -20,3 +20,17 @@ class Mobo(Component):
     
     def __str__(self):
         return f"{super().__str__()} - {self.form_factor} - {self.socket} - {self.chipset} - {self.memory_slots} slots {self.memory_type} - PCIE x{self.pcie_slots}"
+    
+    def to_dict(self):
+        return {
+            "id_component": self.id_component,
+            "manufacturer": self.manufacturer,
+            "model": self.model,
+            "price": self.price,
+            "form_factor": self.form_factor,
+            "socket": self.socket,
+            "chipset": self.chipset,
+            "memory_type": self.memory_type,
+            "memory_slots": self.memory_slots,
+            "pcie_slots": self.pcie_slots
+        }

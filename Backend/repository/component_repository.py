@@ -25,5 +25,7 @@ def delete_by_id(session, component):
 
 #PUT
 def update(session, component):
+    #component = session.merge(component)
     session.commit()
+    #session.refresh(component)
     return component

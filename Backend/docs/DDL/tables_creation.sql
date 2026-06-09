@@ -40,12 +40,12 @@ CREATE TABLE IF NOT EXISTS Cpu_cooler(
 
 CREATE TABLE IF NOT EXISTS Form_factor(
 	id_form_factor SERIAL PRIMARY KEY,
-	type VARCHAR(15) NOT NULL
+	form_factor_type VARCHAR(15) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Tower_case(
 	id_component INT PRIMARY KEY,
-	type VARCHAR(20) NOT NULL,
+	case_type VARCHAR(20) NOT NULL,
 	max_video_card_length INT NOT NULL,
 	FOREIGN KEY (id_component) REFERENCES Component(id_component)
 );
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS Psu(
 CREATE TABLE IF NOT EXISTS Storage(
 	id_component INT PRIMARY KEY,
 	capacity VARCHAR(10) NOT NULL,
-	type VARCHAR(10) NOT NULL,
+	storage_type VARCHAR(10) NOT NULL,
 	FOREIGN KEY (id_component) REFERENCES Component(id_component)
 );
 

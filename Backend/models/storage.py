@@ -5,7 +5,7 @@ class Storage(Component):
 
     id_component = Column(Integer, ForeignKey("component.id_component"), primary_key=True)
     capacity = Column(String(10), nullable=False)
-    type = Column(String(10), nullable=False)
+    storage_type = Column(String(10), nullable=False)
 
     __mapper_args__ = {
         "polymorphic_identity": "storage"
@@ -16,3 +16,13 @@ class Storage(Component):
     
     def __str__(self):
         return f"{super().__str__()} - {self.type} - {self.capacity}"
+    
+    def to_dict(self):
+        return  {
+            "id_component": self.id_component,
+            "price": self.price,
+            "manufacturer": self.manufacturer,
+            "model": self.model,
+            "capacity": self.capacity,
+            "storage_type": self.storage_type
+        }

@@ -19,6 +19,7 @@ def get_by_attributes(session, component_class, filters):
 def create(session, component):
     session.add(component)
     session.commit()
+    session.refresh(component)
     return component
 
 #DELETE

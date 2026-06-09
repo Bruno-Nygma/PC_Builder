@@ -11,7 +11,7 @@ class TowerCase(Component):
     max_video_card_length = Column(Integer, nullable=False)
 
     __mapper_args__ = {
-        "polimorphic_identity": "tower_case"
+        "polymorphic_identity": "tower_case"
     }
 
     form_factors = relationship("FormFactor", secondary=compatible_with, back_populates="tower_cases")

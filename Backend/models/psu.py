@@ -7,7 +7,7 @@ class Psu(Component):
     wattage = Column(Integer, nullable=False)
 
     __mapper_args__ = {
-        "polimorphic_identity": "psu"
+        "polymorphic_identity": "psu"
     }
 
     def __repr__(self):
@@ -15,3 +15,12 @@ class Psu(Component):
     
     def __str__(self):
         return f"{super().__str__()} - {self.wattage}W"
+    
+    def to_dict(self):
+        return {
+            "id_component": self.id_component,
+            "manufacturer": self.manufacturer,
+            "model": self.model,
+            "price": self.price,
+            "wattage": self.wattage
+        }

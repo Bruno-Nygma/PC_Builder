@@ -12,7 +12,7 @@ class Mobo(Component):
     pcie_slots = Column(Integer, nullable=False)
 
     __mapper_args__ = {
-        "polimorphic_identity": "mobo"
+        "polymorphic_identity": "mobo"
     }
 
     def __repr__(self):

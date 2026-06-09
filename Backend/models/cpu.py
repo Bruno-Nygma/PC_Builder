@@ -10,7 +10,7 @@ class Cpu(Component):
     socket = Column(String(50), nullable=False)
 
     __mapper_args__ = {
-        "polimorphic_identity": "cpu"
+        "polymorphic_identity": "cpu"
     }
 
     def __repr__(self):
@@ -18,3 +18,15 @@ class Cpu(Component):
     
     def __str__(self):
         return f"{super().__str__()} - {self.clock}GHz - {self.tdp}W - socket:{self.socket}"
+    
+    def to_dict(self):
+        return {
+            "id_component": self.id_component,
+            "manufacturer": self.manufacturer,
+            "model": self.model,
+            "price": self.price,
+            "clock": self.clock,
+            "integrated_graphics": self.integrated_graphics,
+            "tdp": self.tdp,
+            "socket": self.socket
+        }

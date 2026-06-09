@@ -8,7 +8,7 @@ class Memory(Component):
     speed = Column(Integer, nullable=False)
 
     __mapper_args__ = {
-        "polimorphic_identity": "memory"
+        "polymorphic_identity": "memory"
     }
 
     def __repr__(self):
@@ -16,3 +16,13 @@ class Memory(Component):
     
     def __str__(self):
         return f"{super().__str__()} - {self.form_factor} - {self.speed}MHz"
+    
+    def to_dict(self):
+        return  {
+            "id_component": self.id_component,
+            "price": self.price,
+            "manufacturer": self.manufacturer,
+            "model": self.model,
+            "form_factor": self.form_factor,
+            "speed": self.speed
+        }

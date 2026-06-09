@@ -25,3 +25,8 @@ class Build(Base):
     
     def __str__(self):
         return f"{self.price}"
+
+    def to_dict(self):
+        return {
+            
+        }

@@ -23,3 +23,9 @@ class FormFactor(Base):
     
     def __str__(self):
         return f"{self.type}"
+    
+    def to_dict(self):
+        return {
+            "id_form_factor": self.id_form_factor,
+            "type": self.type
+        }

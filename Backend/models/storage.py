@@ -8,7 +8,7 @@ class Storage(Component):
     type = Column(String(10), nullable=False)
 
     __mapper_args__ = {
-        "polimorphic_identity": "storage"
+        "polymorphic_identity": "storage"
     }
 
     def __repr__(self):

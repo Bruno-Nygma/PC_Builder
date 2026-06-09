@@ -15,8 +15,8 @@ class Component(Base):
     #maybe __mapped_args__
 
     __mapper_args__ = {
-        "polimorphic_identity": "component",
-        "polimorphic_on": type
+        "polymorphic_identity": "component",
+        "polymorphic_on": type
     }
 
     builds = relationship("Build", secondary=includes, back_populates="components")

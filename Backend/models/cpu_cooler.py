@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, ForeignKey, Boolean
 from models.component import Component
-class Cpu_cooler(Component):
+class CpuCooler(Component):
     __tablename__ = "cpu_cooler"
 
     id_component = Column(Integer, ForeignKey("component.id_component"), primary_key=True)
@@ -8,7 +8,7 @@ class Cpu_cooler(Component):
     water_cooled = Column(Boolean, nullable=False)
 
     __mapper_args__ = {
-        "polimorphic_identity": "cpu_cooler"
+        "polymorphic_identity": "cpu_cooler"
     }
 
     def __repr__(self):
@@ -16,3 +16,12 @@ class Cpu_cooler(Component):
 
     def __str__(self):
         return f"{super().__str__()} - {self.fan_rpm} - {self.water_cooled}"
+    
+    def to_dict(self):
+        return {
+            "id_component": self.id_component,
+            "manufacturer": self.manufacturer,
+            "model": self.model,
+            "fan_rpm": self.fan_rpm,
+            "water_cooled": self.water_cooled
+        }

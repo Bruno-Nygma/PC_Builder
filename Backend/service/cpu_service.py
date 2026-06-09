@@ -23,4 +23,15 @@ def create(data):
         )
         return component_repository.create(session, cpu)
 
-#TODO update
+def update(cpu_id, data):
+    with get_session() as session:
+
+        cpu = component_repository.get_by_id(session, cpu_id).to_dict()
+
+
+        for k,v in data.items():
+            cpu[k] = v
+
+        cpu = Cpu(**cpu)
+    
+        return component_repository.update(session, cpu)

@@ -21,5 +21,16 @@ def create(data):
         )
         return component_repository.create(session, cpu_cooler)
 
-#TODO update
+def update(cpu_cooler_id, data):
+    with get_session() as session:
+
+        cpu_cooler = component_repository.get_by_id(session, cpu_cooler_id).to_dict()
+
+
+        for k,v in data.items():
+            cpu_cooler[k] = v
+
+        cpu_cooler = CpuCooler(**cpu_cooler)
+    
+        return component_repository.update(session, cpu_cooler)
     

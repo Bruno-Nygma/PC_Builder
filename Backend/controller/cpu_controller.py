@@ -19,3 +19,12 @@ def create():
     
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
+
+@cpu_bp.route("/<int:component_id>", methods = ["PUT"])
+def update(component_id):
+    try:
+        data = request.get_json()
+        updated = cpu_service.update(component_id, data)
+        return jsonify(updated.to_dict())
+    except Exception as e:
+        return str(e)

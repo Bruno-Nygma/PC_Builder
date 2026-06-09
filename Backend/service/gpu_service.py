@@ -21,4 +21,16 @@ def create(data):
         )
         return component_repository.create(session, gpu)
 
-#TODO update
+
+def update(gpu_id, data):
+    with get_session() as session:
+
+        gpu = component_repository.get_by_id(session, gpu_id).to_dict()
+
+
+        for k,v in data.items():
+            gpu[k] = v
+
+        gpu = Gpu(**gpu)
+    
+        return component_repository.update(session, gpu)

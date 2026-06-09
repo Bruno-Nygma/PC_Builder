@@ -21,5 +21,16 @@ def create(data):
         )
         return component_repository.create(session, memory)
 
-#TODO update
-    
+
+def update(memory_id, data):
+    with get_session() as session:
+
+        mem = component_repository.get_by_id(session, memory_id).to_dict()
+
+
+        for k,v in data.items():
+            mem[k] = v
+
+        mem = Memory(**mem)
+
+        return component_repository.update(session, mem)

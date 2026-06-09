@@ -6,6 +6,9 @@ from models.component import Component
 def get_all(session):
     return session.execute(select(Component)).scalars().all()
 
+def get_by_id(session, component_id):
+    return session.get(Component, component_id)
+
 def get_by_type(session, component_class):
     return session.execute(select(component_class)).scalars().all()
 
@@ -25,7 +28,5 @@ def delete_by_id(session, component):
 
 #PUT
 def update(session, component):
-    #component = session.merge(component)
     session.commit()
-    #session.refresh(component)
     return component

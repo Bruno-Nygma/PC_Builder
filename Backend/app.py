@@ -9,6 +9,7 @@ from controller.gpu_controller import gpu_bp
 from controller.storage_controller import storage_bp
 from controller.psu_controller import psu_bp
 from controller.tower_case_controller import tower_case_bp
+from controller.mobo_controller import mobo_bp
 
 from models.account import Account
 
@@ -22,6 +23,7 @@ app.register_blueprint(gpu_bp)
 app.register_blueprint(storage_bp)
 app.register_blueprint(psu_bp)
 app.register_blueprint(tower_case_bp)
+app.register_blueprint(mobo_bp)
 
 if __name__ == "__main__":
     app.run(debug = True, port = 5000)

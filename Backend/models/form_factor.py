@@ -13,7 +13,7 @@ class FormFactor(Base):
     __tablename__ = "form_factor"
 
     id_form_factor = Column(Integer, primary_key=True, autoincrement=True)
-    type = Column(String(15), nullable=False)
+    form_factor_type = Column(String(15), nullable=False)
 
     tower_cases = relationship("TowerCase", secondary= compatible_with, back_populates="form_factors")
 

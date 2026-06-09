@@ -7,7 +7,7 @@ class TowerCase(Component):
     __tablename__ = "tower_case"
 
     id_component = Column(Integer, ForeignKey("component.id_component"), primary_key=True)
-    type = Column(String(20), nullable=False)
+    case_type = Column(String(20), nullable=False)
     max_video_card_length = Column(Integer, nullable=False)
 
     __mapper_args__ = {
@@ -21,3 +21,13 @@ class TowerCase(Component):
     
     def __str__(self):
         return f"{super().__str__()} - {self.type} - max video card length: {self.max_video_card_length}"
+    
+    def to_dict(self):
+        return {
+            "id_component": self.id_component,
+            "manufacturer": self.manufacturer,
+            "model": self.model,
+            "price": self.price,
+            "case_type": self.case_type,
+            "max_video_card_length": self.max_video_card_length
+        }

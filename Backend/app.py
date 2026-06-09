@@ -8,6 +8,7 @@ from controller.cpu_cooler_controller import cpu_cooler_bp
 from controller.gpu_controller import gpu_bp
 from controller.storage_controller import storage_bp
 from controller.psu_controller import psu_bp
+from controller.tower_case_controller import tower_case_bp
 
 from models.account import Account
 
@@ -20,6 +21,7 @@ app.register_blueprint(cpu_cooler_bp)
 app.register_blueprint(gpu_bp)
 app.register_blueprint(storage_bp)
 app.register_blueprint(psu_bp)
+app.register_blueprint(tower_case_bp)
 
 if __name__ == "__main__":
     app.run(debug = True, port = 5000)

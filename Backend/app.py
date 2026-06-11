@@ -12,7 +12,7 @@ from controller.tower_case_controller import tower_case_bp
 from controller.mobo_controller import mobo_bp
 from controller.auth_controller import auth_bp
 
-from models.account import Account
+# from models.account import Account
 
 app = Flask(__name__)
 CORS(app)

@@ -28,6 +28,7 @@ def login():
         return jsonify({"token": token, "account": account.to_dict()})
     except ValueError as e:
         return jsonify({"error": str(e)}), 401
+     
     
 def token_required(f):
     @wraps(f)
@@ -66,6 +67,11 @@ def role_required(*permitted_roles):
         return decorated
     
     return decorator
+
+@auth_bp.route("/logged")
+@token_required
+def logged():
+    return jsonify({ 'result': True})
 
 @auth_bp.route("/me")
 @token_required

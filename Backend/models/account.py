@@ -19,3 +19,12 @@ class Account(Base):
 
     def __str__(self):
         return f"{self.name} - {self.surname} - {self.email}"
+    
+    def to_dict(self):
+        return {
+            "id_account": self.id_account,
+            "name": self.name,
+            "surname": self.surname,
+            "email": self.email,
+            "role": self.role
+        }

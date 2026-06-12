@@ -8,16 +8,26 @@ export function BuilderPage() {
     const [componentsList, setComponentsList] = createSignal([])
     const [componentType, setComponentType] = createSignal()
     const [tableFields, setTableFields] = createSignal([])
+    const [loading, setLoading] = createSignal(false)
 
     function Component(text, api_url, type) {
         return jd.button({
             className: "btn btn-soft btn-primary w-full max-w-1/12",
-            onclick: () => {
+            ref: (el) => {
+                effect(el, () => {
+                    el.disabled = loading() ? true : false;
+                })
+            },
+            onclick: (e) => {
+                setLoading(true)
                 fetch(`${import.meta.env.VITE_API_URL}${api_url}`)
                     .then(async res => {
                         const components = await res.json();
                         console.log(`[DEBUG] components:`, components)
                         setComponentsList(components)
+                    })
+                    .finally(() => {
+                        setLoading(false)
                     })
                 setComponentType(type)
                 console.log(`[DEBUG] componentType: ${componentType()}`);
@@ -36,10 +46,17 @@ export function BuilderPage() {
                         if (tableFields()[field] in component) {
                             el.append(jd.td({}, [`${component[tableFields()[field]]}`]))
                         }
-                    }
+                    };
                     el.append(jd.td({}, [
-                        jd.button({ classname: 'btn btn-primary btn-soft' }, ["Add"])
-                    ]))
+                        jd.button({ 
+                            className: 'btn btn-primary btn-soft',
+                            ref: (el) => {
+                                effect(el, () => {
+                                    el.disabled = loading() ? true : false
+                                })
+                            }
+                        }, ["Add"])
+                    ]));
                 })
             }
         }, [])

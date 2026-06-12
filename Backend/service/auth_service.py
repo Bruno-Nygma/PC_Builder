@@ -58,7 +58,7 @@ def login(data):
             "account_id": account.id_account,
             "email": account.email,
             "role": account.role,
-            "expiry": int((datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=1)).timestamp())
+            "exp": datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=1)
         }
 
         token = jwt.encode(payload, SECRET_KEY, algorithm = "HS256")

@@ -28,44 +28,49 @@ export function BuilderPage() {
     }
 
     function ComponentRow({ component }) {
+        // console.log('[DEBUG] component', component);
         return jd.tr({
             ref: (el) => {
                 effect(el, () => {
-                    for(const field in tableFields()){
-                        if (field in component) {
-                            console.log(`[DEBUG] ${field}: `, component[field]);
-                            el.append(jd.td({}, [component.field]))
+                    for (const field in tableFields()) {
+                        if (tableFields()[field] in component) {
+                            el.append(jd.td({}, [`${component[tableFields()[field]]}`]))
                         }
                     }
+                    el.append(jd.td({}, [
+                        jd.button({ classname: 'btn btn-primary btn-soft' }, ["Add"])
+                    ]))
                 })
             }
-        },[])
+        }, [])
     }
 
     function Table() {
         console.log(`[DEBUG] componentType: ${componentType()}`);
         return jd.div({ className: `overflow-x-auto ` }, [ //${componentType() ? '' : 'hidden'}
             jd.table({ className: "table" }, [
-                jd.thead({
-                    ref: (el) => {
-                        effect(el, () => {
-                            if(componentType()){
-                                fetch(`${import.meta.env.VITE_API_URL}/${componentType()}/blueprint`)
-                                    .then(async res => {
-                                        const blueprint = await res.json();
-                                        setTableFields(blueprint);
-                                        console.log(`[DEBUG] tableFields: `, tableFields());
-                                        el.innerHTML = '';
-                                        for(const attr in blueprint){
-                                            el.append(
-                                                jd.th({}, blueprint[attr])
-                                            )
-                                        }
-                                    })
-                            }
-                        })
-                    }
-                }, []),
+                jd.thead({}, [
+                    jd.tr({
+                        ref: (el) => {
+                            effect(el, () => {
+                                if (componentType()) {
+                                    el.innerHTML = '';
+                                    fetch(`${import.meta.env.VITE_API_URL}/${componentType()}/blueprint`)
+                                        .then(async res => {
+                                            const blueprint = await res.json();
+                                            setTableFields(blueprint);
+                                            console.log(`[DEBUG] tableFields: `, tableFields());
+                                            for (const attr in blueprint) {
+                                                el.append(
+                                                    jd.th({}, blueprint[attr])
+                                                )
+                                            }
+                                        })
+                                }
+                            })
+                        }
+                    }, [])
+                ]),
                 jd.tbody({
                     ref: (el) => {
                         effect(el, () => {
@@ -73,13 +78,7 @@ export function BuilderPage() {
                             el.append(...componentsList().map(component => ComponentRow({ component })));
                         })
                     }
-                }, [
-                    // jd.tr({}, [
-                    //     jd.td({}, [
-                    //         jd.lucide('Loader2', { className: 'animate-spin' })
-                    //     ])
-                    // ])
-                ])
+                }, [])
             ]),
         ]);
     }

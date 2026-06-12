@@ -1,4 +1,4 @@
-import { createSignal } from "@just-dom/signals";
+import { createSignal, effect } from "@just-dom/signals";
 import { jd } from "../jd.config";
 
 
@@ -16,9 +16,10 @@ export function NavbarLayout({ outlet }) {
   })
     .then(async res => {
       const data = await res.json();
-      const logged = data['result'];
-      console.log(logged);
-      setLogged(logged);
+      const check_logged = data['result'];
+      console.log(`[DEBUG] check_logged = ${check_logged}`);
+      setLogged(check_logged ? check_logged : false);
+      console.log(`[DEBUG] logged() = ${logged()}`);
     })
 
   return jd.div({ className: "drawer" }, [
@@ -57,6 +58,42 @@ export function NavbarLayout({ outlet }) {
           jd.ul({ className: "menu menu-horizontal" }, [
             NavbarItem({ text: 'Builder', icon: 'Wrench', href: '/builder' }),
             jd.li({}, [jd.a({}, [" Navbar Item 2"])]),
+            jd.li({
+              // if user is logged, 'account' is replaced by 'builds'
+              ref: (el) => {
+                effect(el, () => {
+                  el.innerHTML = '';
+                  if (logged()) {
+                    el.replaceWith(
+                      NavbarItem({ text: 'Builds', icon: 'PcCase', href:'/builds' })
+                    )
+                  }
+                })
+              }
+            }, [
+              jd.button(
+                {
+                  popovertarget: "popover-1",
+                  style: "anchor-name:--anchor-1",
+                },
+                [
+                  jd.lucide("User", { className: 'size-4 inline-block' }),
+                  jd.span({}, ["Account"])
+                ]
+              ),
+              jd.ul(
+                {
+                  className: "dropdown menu w-52 rounded-box bg-base-100 shadow-sm",
+                  popover: "",
+                  id: "popover-1",
+                  style: "position-anchor:--anchor-1",
+                },
+                [
+                  jd.li({}, [jd.a({}, ["Register"])]),
+                  jd.li({}, [jd.a({}, ["Login"])])
+                ]
+              )
+            ])
           ]),
         ]),
       ]),
@@ -69,7 +106,7 @@ export function NavbarLayout({ outlet }) {
         className: "drawer-overlay",
       }),
       jd.ul({ className: "menu bg-base-200 min-h-full w-80 p-4" }, [
-        jd.li({}, [jd.a({}, [" Sidebar Item 1"])]),
+        NavbarItem({ text: 'Builder', icon: 'Wrench', href: '/builder' }),
         jd.li({}, [jd.a({}, [" Sidebar Item 2"])]),
       ]),
     ]),

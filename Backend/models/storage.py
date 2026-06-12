@@ -20,6 +20,7 @@ class Storage(Component):
     def to_dict(self):
         return  {
             "id_component": self.id_component,
+            "type": self.type,
             "price": self.price,
             "manufacturer": self.manufacturer,
             "model": self.model,

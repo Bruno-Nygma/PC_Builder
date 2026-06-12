@@ -19,6 +19,7 @@ class Psu(Component):
     def to_dict(self):
         return {
             "id_component": self.id_component,
+            "type": self.type,
             "manufacturer": self.manufacturer,
             "model": self.model,
             "price": self.price,

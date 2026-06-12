@@ -25,3 +25,6 @@ class Psu(Component):
             "price": self.price,
             "wattage": self.wattage
         }
+    
+    def blueprint():
+        return ["manufacturer", "model", "wattage", "price"]

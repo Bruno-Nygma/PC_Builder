@@ -27,3 +27,6 @@ class Gpu(Component):
             "tdp": self.tdp,
             "vram": self.vram
         }
+    
+    def blueprint():
+        return ["manufacturer", "model", "vram", "tdp", "price"]

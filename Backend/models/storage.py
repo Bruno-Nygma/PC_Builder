@@ -27,3 +27,6 @@ class Storage(Component):
             "capacity": self.capacity,
             "storage_type": self.storage_type
         }
+    
+    def blueprint():
+        return ["manufacturer", "model", "capacity", "storage_type", "price"]

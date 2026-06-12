@@ -22,7 +22,11 @@ class CpuCooler(Component):
             "id_component": self.id_component,
             "type": self.type,
             "manufacturer": self.manufacturer,
+            "price": self.price,
             "model": self.model,
             "fan_rpm": self.fan_rpm,
             "water_cooled": self.water_cooled
         }
+    
+    def blueprint():
+        return ["manufacturer", "model", "fan_rpm", "water_cooled", "price"]

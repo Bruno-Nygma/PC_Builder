@@ -9,6 +9,10 @@ def get_all():
     cpu_list = cpu_service.get_all()
     return jsonify([c.to_dict() for c in cpu_list])
 
+@cpu_bp.route("/blueprint", methods = ["GET"])
+def get_blueprint():
+    return jsonify(cpu_service.get_blueprint())
+
 @cpu_bp.route("/new", methods = ["POST"])
 def create():
     data = request.get_json()

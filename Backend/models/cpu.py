@@ -31,3 +31,6 @@ class Cpu(Component):
             "tdp": self.tdp,
             "socket": self.socket
         }
+    
+    def blueprint():
+        return ["manufacturer", "model", "clock", "socket", "integrated_graphics", "tdp", "price"]

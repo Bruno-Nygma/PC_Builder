@@ -9,6 +9,10 @@ def get_all():
     storage_list = storage_service.get_all()
     return jsonify([s.to_dict() for s in storage_list])
 
+@storage_bp.route("/blueprint", methods = ["GET"])
+def get_blueprint():
+    return storage_service.get_blueprint()
+
 @storage_bp.route("/new", methods = ["POST"])
 def create():
     data = request.get_json()

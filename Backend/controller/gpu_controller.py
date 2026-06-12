@@ -9,6 +9,10 @@ def get_all():
     gpu_list = gpu_service.get_all()
     return jsonify([g.to_dict() for g in gpu_list])
 
+@gpu_bp.route("/blueprint", methods = ["GET"])
+def get_blueprint():
+    return gpu_service.get_blueprint()
+
 @gpu_bp.route("/new", methods = ["POST"])
 def create():
     data = request.get_json()

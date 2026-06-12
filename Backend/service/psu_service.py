@@ -10,6 +10,10 @@ def get_all():
     with get_session() as session:
         return component_repository.get_by_type(session, Psu)
 
+def get_blueprint():
+    return Psu.blueprint()
+    
+    
 def create(data):
     with get_session() as session:
         psu = Psu(

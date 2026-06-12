@@ -35,3 +35,6 @@ class Mobo(Component):
             "memory_slots": self.memory_slots,
             "pcie_slots": self.pcie_slots
         }
+    
+    def blueprint():
+        return ["manufacturer", "model", "form_factor", "socket", "chipset", "memory_type", "memory_slots", "pcie_slots", "price"]

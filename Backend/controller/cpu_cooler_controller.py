@@ -9,6 +9,10 @@ def get_all():
     cpu_cooler_list = cpu_cooler_service.get_all()
     return jsonify([c.to_dict() for c in cpu_cooler_list])
 
+@cpu_cooler_bp.route("/blueprint", methods = ["GET"])
+def get_blueprint():
+    return cpu_cooler_service.get_blueprint()
+
 @cpu_cooler_bp.route("/new", methods = ["POST"])
 def create():
     data = request.get_json()

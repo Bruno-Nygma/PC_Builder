@@ -9,6 +9,10 @@ def get_all():
     memory_list = memory_service.get_all()
     return jsonify([m.to_dict() for m in memory_list])
 
+@memory_bp.route("/blueprint", methods = ["GET"])
+def get_blueprint():
+    return memory_service.get_blueprint()
+
 @memory_bp.route("/new", methods = ["POST"])
 def create():
     data = request.get_json()

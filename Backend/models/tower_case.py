@@ -32,3 +32,6 @@ class TowerCase(Component):
             "case_type": self.case_type,
             "max_video_card_length": self.max_video_card_length
         }
+    
+    def blueprint():
+        return ["manufacturer", "model", "case_type", "max_video_card_length", "price"]

@@ -27,3 +27,6 @@ class Memory(Component):
             "form_factor": self.form_factor,
             "speed": self.speed
         }
+    
+    def blueprint():
+        return ["manufacturer", "model", "form_factor", "speed", "price"]

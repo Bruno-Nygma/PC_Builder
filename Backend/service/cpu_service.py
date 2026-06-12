@@ -9,6 +9,9 @@ from persistence.db_config import get_session
 def get_all():
     with get_session() as session:
         return component_repository.get_by_type(session, Cpu)
+    
+def get_blueprint():
+    return Cpu.blueprint()
 
 def create(data):
     with get_session() as session:

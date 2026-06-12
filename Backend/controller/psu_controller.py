@@ -9,6 +9,10 @@ def get_all():
     psu_list = psu_service.get_all()
     return jsonify([p.to_dict() for p in psu_list])
 
+@psu_bp.route("/blueprint", methods = ["GET"])
+def get_blueprint():
+    return psu_service.get_blueprint()
+
 @psu_bp.route("/new", methods = ["POST"])
 def create():
     data = request.get_json()

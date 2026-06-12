@@ -9,6 +9,10 @@ def get_all():
     case_list = tower_case_service.get_all()
     return jsonify([c.to_dict() for c in case_list])
 
+@tower_case_bp.route("/blueprint", methods = ["GET"])
+def get_blueprint():
+    return tower_case_service.get_blueprint()
+
 @tower_case_bp.route("/new", methods = ["POST"])
 def create():
     data = request.get_json()

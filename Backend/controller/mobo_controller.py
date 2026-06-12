@@ -9,6 +9,10 @@ def get_all():
     mobo_list = mobo_service.get_all()
     return jsonify([m.to_dict() for m in mobo_list])
 
+@mobo_bp.route("/blueprint", methods = ["GET"])
+def get_blueprint():
+    return mobo_service.get_blueprint()
+
 @mobo_bp.route("/new", methods = ["POST"])
 def create():
     data = request.get_json()

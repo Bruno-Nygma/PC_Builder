@@ -10,6 +10,8 @@ export function BuilderPage() {
     const [tableFields, setTableFields] = createSignal([])
     const [loading, setLoading] = createSignal(false)
 
+    const build = []
+
     function Component(text, api_url, type) {
         return jd.button({
             className: "btn btn-soft btn-primary w-full max-w-1/12",
@@ -18,16 +20,13 @@ export function BuilderPage() {
                     el.disabled = loading() ? true : false;
                 })
             },
-            onclick: (e) => {
+            onclick: () => {
                 setLoading(true)
                 fetch(`${import.meta.env.VITE_API_URL}${api_url}`)
                     .then(async res => {
                         const components = await res.json();
                         console.log(`[DEBUG] components:`, components)
                         setComponentsList(components)
-                    })
-                    .finally(() => {
-                        setLoading(false)
                     })
                 setComponentType(type)
                 console.log(`[DEBUG] componentType: ${componentType()}`);
@@ -42,20 +41,29 @@ export function BuilderPage() {
         return jd.tr({
             ref: (el) => {
                 effect(el, () => {
+                    el.innerHTML = '';
                     for (const field in tableFields()) {
                         if (tableFields()[field] in component) {
                             el.append(jd.td({}, [`${component[tableFields()[field]]}`]))
                         }
                     };
                     el.append(jd.td({}, [
-                        jd.button({ 
+                        jd.button({
                             className: 'btn btn-primary btn-soft',
                             ref: (el) => {
                                 effect(el, () => {
                                     el.disabled = loading() ? true : false
                                 })
+                            },
+                            onclick: () => {
+                                build.push(component);
+                                console.log('[DEBUG] build: ', build);
+                                setComponentType();
                             }
-                        }, ["Add"])
+                        }, [
+                            jd.lucide('Plus', { className: 'size-4' }),
+                            "Add"
+                        ])
                     ]));
                 })
             }
@@ -64,7 +72,22 @@ export function BuilderPage() {
 
     function Table() {
         console.log(`[DEBUG] componentType: ${componentType()}`);
-        return jd.div({ className: `overflow-x-auto ` }, [ //${componentType() ? '' : 'hidden'}
+        return jd.div({
+            className: `overflow-x-auto`,
+            // ref: (el) => {
+            //     effect(el, () => {
+            //         if (!loading()) {
+            //             el.replaceChildren(
+
+            //             )
+            //         } else {
+            //             el.replaceChildren(
+            //                 jd.lucide('Loader2', { className: 'animate-spin size-10' })
+            //             )
+            //         }
+            //     })
+            // }
+        }, [
             jd.table({ className: "table" }, [
                 jd.thead({}, [
                     jd.tr({
@@ -76,12 +99,16 @@ export function BuilderPage() {
                                         .then(async res => {
                                             const blueprint = await res.json();
                                             setTableFields(blueprint);
-                                            console.log(`[DEBUG] tableFields: `, tableFields());
+                                            // console.log(`[DEBUG] tableFields: `, tableFields());
                                             for (const attr in blueprint) {
                                                 el.append(
                                                     jd.th({}, blueprint[attr])
                                                 )
                                             }
+                                            el.append(jd.th({}, []))
+                                        })
+                                        .finally(() => {
+                                            setLoading(false)
                                         })
                                 }
                             })
@@ -113,6 +140,8 @@ export function BuilderPage() {
         ]),
         Table()
     ])
+
+    
 }
 
 

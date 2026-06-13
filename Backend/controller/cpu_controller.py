@@ -4,9 +4,15 @@ from service import cpu_service
 
 cpu_bp = Blueprint("cpu", __name__, url_prefix="/api/cpu")
 
-@cpu_bp.route("/list", methods = ["GET"])
-def get_all():
-    cpu_list = cpu_service.get_all()
+@cpu_bp.route("/list", methods = ["POST"])
+def get_filtered():
+
+    filters = {}
+    build = request.get_json()
+    if build["mobo"]:
+        filters["socket"] = build["mobo"]["socket"]
+
+    cpu_list = cpu_service.get_filtered(filters)
     return jsonify([c.to_dict() for c in cpu_list])
 
 @cpu_bp.route("/blueprint", methods = ["GET"])

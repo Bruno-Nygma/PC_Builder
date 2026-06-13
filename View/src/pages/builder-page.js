@@ -10,25 +10,36 @@ export function BuilderPage() {
     const [tableFields, setTableFields] = createSignal([])
     const [loading, setLoading] = createSignal(false)
 
-    const build = []
+    const build = {}
 
     function Component(text, api_url, type) {
         return jd.button({
             className: "btn btn-soft btn-primary w-full max-w-1/12",
             ref: (el) => {
                 effect(el, () => {
-                    el.disabled = loading() ? true : false;
+                    // el.disabled = loading() ? true : false;
+                    if (componentType() === type || loading()){
+                        el.disabled = true;
+                    } else {
+                        el.disabled = false;
+                    }
                 })
             },
             onclick: () => {
                 setLoading(true)
-                fetch(`${import.meta.env.VITE_API_URL}${api_url}`)
+                setComponentType(type)
+                fetch(`${import.meta.env.VITE_API_URL}${api_url}`,{
+                    method: 'POST',
+                    body: JSON.stringify(build),
+                    headers:{
+                        'Content-type': 'application/json'
+                    }
+                })
                     .then(async res => {
                         const components = await res.json();
                         console.log(`[DEBUG] components:`, components)
                         setComponentsList(components)
                     })
-                setComponentType(type)
                 console.log(`[DEBUG] componentType: ${componentType()}`);
             }
         },
@@ -52,18 +63,28 @@ export function BuilderPage() {
                             className: 'btn btn-primary btn-soft',
                             ref: (el) => {
                                 effect(el, () => {
-                                    el.disabled = loading() ? true : false
+                                    el.disabled = loading() ? true : false;
+                                    if (component["type"] in build) {
+                                        el.replaceChildren(
+                                            jd.lucide('ArrowDownUp', { className: 'size-4' }),
+                                            "Swap"
+                                        )
+                                    } else {
+                                        el.replaceChildren(
+                                            jd.lucide('Plus', { className: 'size-4' }),
+                                            "Add"
+                                        )
+                                    }
                                 })
                             },
                             onclick: () => {
-                                build.push(component);
+                                // if(component["type"])
+                                setLoading(true)
+                                build[component["type"]] = component;
                                 console.log('[DEBUG] build: ', build);
-                                setComponentType();
+                                setLoading(false)
                             }
-                        }, [
-                            jd.lucide('Plus', { className: 'size-4' }),
-                            "Add"
-                        ])
+                        }, [])
                     ]));
                 })
             }
@@ -72,22 +93,7 @@ export function BuilderPage() {
 
     function Table() {
         console.log(`[DEBUG] componentType: ${componentType()}`);
-        return jd.div({
-            className: `overflow-x-auto`,
-            // ref: (el) => {
-            //     effect(el, () => {
-            //         if (!loading()) {
-            //             el.replaceChildren(
-
-            //             )
-            //         } else {
-            //             el.replaceChildren(
-            //                 jd.lucide('Loader2', { className: 'animate-spin size-10' })
-            //             )
-            //         }
-            //     })
-            // }
-        }, [
+        return jd.div({ className: `overflow-x-auto` }, [
             jd.table({ className: "table" }, [
                 jd.thead({}, [
                     jd.tr({
@@ -102,7 +108,9 @@ export function BuilderPage() {
                                             // console.log(`[DEBUG] tableFields: `, tableFields());
                                             for (const attr in blueprint) {
                                                 el.append(
-                                                    jd.th({}, blueprint[attr])
+                                                    jd.th({}, [
+                                                        blueprint[attr].split('_').map(word => word[0].toUpperCase() + word.slice(1)).join(' ')
+                                                    ])
                                                 )
                                             }
                                             el.append(jd.th({}, []))
@@ -141,7 +149,7 @@ export function BuilderPage() {
         Table()
     ])
 
-    
+
 }
 
 

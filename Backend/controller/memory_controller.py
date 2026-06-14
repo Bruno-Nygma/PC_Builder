@@ -4,9 +4,15 @@ from service import memory_service
 
 memory_bp = Blueprint("memory", __name__, url_prefix="/api/memory")
 
-@memory_bp.route("/list", methods = ["GET"])
-def get_all():
-    memory_list = memory_service.get_all()
+@memory_bp.route("/list", methods = ["POST"])
+def get_filters():
+    filters = {}
+    build = request.get_json()
+
+    if "mobo" in build:
+        filters["form_factor"] = build["mobo"]["memory_type"]
+
+    memory_list = memory_service.get_filtered(filters)
     return jsonify([m.to_dict() for m in memory_list])
 
 @memory_bp.route("/blueprint", methods = ["GET"])

@@ -6,9 +6,9 @@ from persistence.db_config import get_session
 #TODO controlli 
 
 
-def get_all():
+def get_filtered(filters):
     with get_session() as session:
-        return component_repository.get_by_type(session, Memory)
+        return component_repository.get_by_attributes(session, Memory, filters)
     
 def get_blueprint():
     return Memory.blueprint()

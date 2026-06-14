@@ -4,8 +4,10 @@ from service import gpu_service
 
 gpu_bp = Blueprint("gpu", __name__, url_prefix="/api/gpu")
 
-@gpu_bp.route("/list", methods = ["GET"])
-def get_all():
+@gpu_bp.route("/list", methods = ["POST"])
+def get_filtered():
+    build = request.get_json()
+
     gpu_list = gpu_service.get_all()
     return jsonify([g.to_dict() for g in gpu_list])
 

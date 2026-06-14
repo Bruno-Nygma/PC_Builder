@@ -8,7 +8,6 @@ class TowerCase(Component):
 
     id_component = Column(Integer, ForeignKey("component.id_component"), primary_key=True)
     case_type = Column(String(20), nullable=False)
-    max_video_card_length = Column(Integer, nullable=False)
 
     __mapper_args__ = {
         "polymorphic_identity": "tower_case"
@@ -17,10 +16,10 @@ class TowerCase(Component):
     form_factors = relationship("FormFactor", secondary=compatible_with, back_populates="tower_cases")
 
     def __repr__(self):
-        return f"TowerCase(id = {self.id_component}, manufacturer = {self.manufacturer}, model = {self.model}, type = {self.type}, max_video_card_length = {self.max_video_card_length})"
+        return f"TowerCase(id = {self.id_component}, manufacturer = {self.manufacturer}, model = {self.model}, type = {self.type})"
     
     def __str__(self):
-        return f"{super().__str__()} - {self.type} - max video card length: {self.max_video_card_length}"
+        return f"{super().__str__()} - {self.type}"
     
     def to_dict(self):
         return {
@@ -29,9 +28,8 @@ class TowerCase(Component):
             "manufacturer": self.manufacturer,
             "model": self.model,
             "price": self.price,
-            "case_type": self.case_type,
-            "max_video_card_length": self.max_video_card_length
+            "case_type": self.case_type
         }
     
     def blueprint():
-        return ["manufacturer", "model", "case_type", "max_video_card_length", "price"]
+        return ["manufacturer", "model", "case_type", "price"]

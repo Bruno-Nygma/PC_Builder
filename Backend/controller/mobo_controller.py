@@ -4,9 +4,20 @@ from service import mobo_service
 
 mobo_bp = Blueprint("mobo", __name__, url_prefix="/api/mobo")
 
-@mobo_bp.route("/list", methods = ["GET"])
-def get_all():
-    mobo_list = mobo_service.get_all()
+@mobo_bp.route("/list", methods = ["POST"])
+def get_filtered():
+    filters = {}
+    build = request.get_json()
+
+    if "cpu" in build:
+        filters["socket"] = build["cpu"]["socket"]
+    if "memory" in build:
+        filters["memory_type"] = build["memory"]["form_factor"]
+
+    #TODO filter by form factor
+
+    mobo_list = mobo_service.get_filtered(filters)
+
     return jsonify([m.to_dict() for m in mobo_list])
 
 @mobo_bp.route("/blueprint", methods = ["GET"])

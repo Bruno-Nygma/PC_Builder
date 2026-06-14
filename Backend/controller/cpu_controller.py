@@ -9,7 +9,7 @@ def get_filtered():
 
     filters = {}
     build = request.get_json()
-    if build["mobo"]:
+    if "mobo" in build:
         filters["socket"] = build["mobo"]["socket"]
 
     cpu_list = cpu_service.get_filtered(filters)

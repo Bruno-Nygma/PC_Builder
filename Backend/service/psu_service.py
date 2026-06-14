@@ -6,9 +6,20 @@ from persistence.db_config import get_session
 #TODO controlli 
 
 
-def get_all():
+def get_filtered(build):
     with get_session() as session:
-        return component_repository.get_by_type(session, Psu)
+        required_wattage = 0
+        if "cpu" in build:
+            required_wattage += build["cpu"]["tdp"]
+        if "gpu" in build:
+            required_wattage += build["gpu"]["tdp"]
+        required_wattage += required_wattage * 0.5
+        psu_list = component_repository.get_by_type(session, Psu)
+        for p in psu_list[:]:
+            if p.wattage < required_wattage:
+                psu_list.remove(p)
+        return psu_list
+            
 
 def get_blueprint():
     return Psu.blueprint()

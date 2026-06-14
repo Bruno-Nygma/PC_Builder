@@ -4,9 +4,11 @@ from service import psu_service
 
 psu_bp = Blueprint("psu", __name__, url_prefix="/api/psu")
 
-@psu_bp.route("/list", methods = ["GET"])
-def get_all():
-    psu_list = psu_service.get_all()
+@psu_bp.route("/list", methods = ["POST"])
+def get_filtered():
+    build = request.get_json()
+
+    psu_list = psu_service.get_filtered(build)
     return jsonify([p.to_dict() for p in psu_list])
 
 @psu_bp.route("/blueprint", methods = ["GET"])

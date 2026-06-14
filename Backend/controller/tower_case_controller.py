@@ -4,7 +4,7 @@ from service import tower_case_service
 
 tower_case_bp = Blueprint("tower_case", __name__, url_prefix="/api/tower_case")
 
-@tower_case_bp.route("/list", methods = ["GET"])
+@tower_case_bp.route("/list", methods = ["POST"])
 def get_all():
     case_list = tower_case_service.get_all()
     return jsonify([c.to_dict() for c in case_list])

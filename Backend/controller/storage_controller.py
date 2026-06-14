@@ -4,7 +4,7 @@ from service import storage_service
 
 storage_bp = Blueprint("storage", __name__, url_prefix="/api/storage")
 
-@storage_bp.route("/list", methods = ["GET"])
+@storage_bp.route("/list", methods = ["POST"])
 def get_all():
     storage_list = storage_service.get_all()
     return jsonify([s.to_dict() for s in storage_list])

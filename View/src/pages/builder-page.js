@@ -9,12 +9,13 @@ export function BuilderPage() {
     const [componentType, setComponentType] = createSignal()
     const [tableFields, setTableFields] = createSignal([])
     const [loading, setLoading] = createSignal(false)
+    const [buildComponents, setBuildComponents] = createSignal({})
 
     const build = {}
 
     function ComponentSelector(text, api_url, type) {
         return jd.button({
-            className: "btn btn-soft btn-primary w-full max-w-1/12",
+            className: "btn btn-soft btn-primary w-full",
             ref: (el) => {
                 effect(el, () => {
                     // el.disabled = loading() ? true : false;
@@ -45,6 +46,20 @@ export function BuilderPage() {
         },
             [text]
         )
+    }
+
+    function ComponentDisplayer(type){
+        return jd.p({
+            className: 'max-w-full text-[14px]',
+            ref: (el) => {
+                effect(el, () => {
+                    if (type in buildComponents()){
+                        console.log('[DEBUG] ComponentDisplayer ', buildComponents()[type]["model"]);
+                        el.replaceChildren(buildComponents()[type]["model"])
+                    }
+                })
+            }
+        }, [])
     }
 
     function ComponentRow({ component }) {
@@ -81,7 +96,8 @@ export function BuilderPage() {
                                 // if(component["type"])
                                 setLoading(true)
                                 build[component["type"]] = component;
-                                console.log('[DEBUG] build: ', build);
+                                setBuildComponents({...build});
+                                console.log('[DEBUG] buildComponents: ', buildComponents());
                                 setLoading(false)
                             }
                         }, [])
@@ -136,15 +152,40 @@ export function BuilderPage() {
     }
 
     return jd.div({}, [
-        jd.div({ className: 'flex justify-around' }, [
-            ComponentSelector("CPU", "/cpu/list", "cpu"),
-            ComponentSelector("CPU Cooler", "/cpu_cooler/list", "cpu_cooler"),
-            ComponentSelector("MoBo", "/mobo/list", "mobo"),
-            ComponentSelector("RAM", "/memory/list", "memory"),
-            ComponentSelector("GPU", "/gpu/list", "gpu"),
-            ComponentSelector("Case", "/tower_case/list", "tower_case"),
-            ComponentSelector("Storage", "/storage/list", "storage"),
-            ComponentSelector("PSU", "/psu/list", "psu")
+        jd.div({ className: 'flex justify-around w-full' }, [
+            jd.div({ className: 'w-full max-w-1/12' }, [
+                ComponentSelector("CPU", "/cpu/list", "cpu"),
+                ComponentDisplayer("cpu")
+            ]),
+            jd.div({ className: 'w-full max-w-1/12' }, [
+                ComponentSelector("CPU Cooler", "/cpu_cooler/list", "cpu_cooler"),
+                ComponentDisplayer("cpu_cooler")
+            ]),
+            jd.div({ className: 'w-full max-w-1/12' }, [
+                ComponentSelector("MoBo", "/mobo/list", "mobo"),
+                ComponentDisplayer("mobo")
+            ]),
+            jd.div({ className: 'w-full max-w-1/12' }, [
+                ComponentSelector("RAM", "/memory/list", "memory"),
+                ComponentDisplayer("memory")
+            ]),
+            jd.div({ className: 'w-full max-w-1/12' }, [
+                ComponentSelector("GPU", "/gpu/list", "gpu"),
+                ComponentDisplayer("gpu")
+            ]),
+            jd.div({ className: 'w-full max-w-1/12' }, [
+                ComponentSelector("Case", "/tower_case/list", "tower_case"),
+                ComponentDisplayer("tower_case")
+            ]),
+            jd.div({ className: 'w-full max-w-1/12' }, [
+                ComponentSelector("Storage", "/storage/list", "storage"),
+                ComponentDisplayer("storage")
+            ]),
+            jd.div({ className: 'w-full max-w-1/12' }, [
+                ComponentSelector("PSU", "/psu/list", "psu"),
+                ComponentDisplayer("psu")
+            ])
+            
         ]),
         Table()
     ])

@@ -4,7 +4,7 @@ from service import cpu_cooler_service
 
 cpu_cooler_bp = Blueprint("cpu_cooler", __name__, url_prefix="/api/cpu_cooler")
 
-@cpu_cooler_bp.route("/list", methods = ["GET"])
+@cpu_cooler_bp.route("/list", methods = ["POST"])
 def get_all():
     cpu_cooler_list = cpu_cooler_service.get_all()
     return jsonify([c.to_dict() for c in cpu_cooler_list])

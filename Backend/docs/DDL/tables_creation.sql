@@ -46,7 +46,6 @@ CREATE TABLE IF NOT EXISTS Form_factor(
 CREATE TABLE IF NOT EXISTS Tower_case(
 	id_component INT PRIMARY KEY,
 	case_type VARCHAR(20) NOT NULL,
-	max_video_card_length INT NOT NULL,
 	FOREIGN KEY (id_component) REFERENCES Component(id_component)
 );
 

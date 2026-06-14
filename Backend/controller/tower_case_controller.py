@@ -6,7 +6,12 @@ tower_case_bp = Blueprint("tower_case", __name__, url_prefix="/api/tower_case")
 
 @tower_case_bp.route("/list", methods = ["POST"])
 def get_all():
-    case_list = tower_case_service.get_all()
+    build = request.get_json()
+    if "mobo" in build:
+        form_factor = build["mobo"]["form_factor"]
+    else:
+        form_factor = False
+    case_list = tower_case_service.get_filtered(form_factor)
     return jsonify([c.to_dict() for c in case_list])
 
 @tower_case_bp.route("/blueprint", methods = ["GET"])

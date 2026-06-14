@@ -1,6 +1,9 @@
 from sqlalchemy import select
 
 from models.component import Component
+from models.tower_case import TowerCase
+from models.form_factor import FormFactor
+from models.mobo import Mobo
 
 #GET
 def get_all(session):
@@ -14,6 +17,9 @@ def get_by_type(session, component_class):
 
 def get_by_attributes(session, component_class, filters): 
     return session.execute(select(component_class).filter_by(**filters)).scalars().all()
+
+def get_case_by_form_factor(session, form_factor):
+    return session.execute(select(TowerCase).join(TowerCase.form_factors).where(FormFactor.form_factor_type == form_factor)).scalars().all()
 
 #CREATE
 def create(session, component):

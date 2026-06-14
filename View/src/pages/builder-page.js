@@ -12,7 +12,7 @@ export function BuilderPage() {
 
     const build = {}
 
-    function Component(text, api_url, type) {
+    function ComponentSelector(text, api_url, type) {
         return jd.button({
             className: "btn btn-soft btn-primary w-full max-w-1/12",
             ref: (el) => {
@@ -55,7 +55,7 @@ export function BuilderPage() {
                     el.innerHTML = '';
                     for (const field in tableFields()) {
                         if (tableFields()[field] in component) {
-                            el.append(jd.td({}, [`${component[tableFields()[field]]}`]))
+                            el.append(jd.td({}, [`${component[tableFields()[field]]}${tableFields()[field] == "tdp" || tableFields()[field] == "wattage" ? 'W' : ''}${tableFields()[field] == "price" ? '$' : ''}`]))
                         }
                     };
                     el.append(jd.td({}, [
@@ -137,14 +137,14 @@ export function BuilderPage() {
 
     return jd.div({}, [
         jd.div({ className: 'flex justify-around' }, [
-            Component("CPU", "/cpu/list", "cpu"),
-            Component("CPU Cooler", "/cpu_cooler/list", "cpu_cooler"),
-            Component("MoBo", "/mobo/list", "mobo"),
-            Component("RAM", "/memory/list", "memory"),
-            Component("GPU", "/gpu/list", "gpu"),
-            Component("Case", "/tower_case/list", "tower_case"),
-            Component("Storage", "/storage/list", "storage"),
-            Component("PSU", "/psu/list", "psu")
+            ComponentSelector("CPU", "/cpu/list", "cpu"),
+            ComponentSelector("CPU Cooler", "/cpu_cooler/list", "cpu_cooler"),
+            ComponentSelector("MoBo", "/mobo/list", "mobo"),
+            ComponentSelector("RAM", "/memory/list", "memory"),
+            ComponentSelector("GPU", "/gpu/list", "gpu"),
+            ComponentSelector("Case", "/tower_case/list", "tower_case"),
+            ComponentSelector("Storage", "/storage/list", "storage"),
+            ComponentSelector("PSU", "/psu/list", "psu")
         ]),
         Table()
     ])

@@ -83,7 +83,7 @@ export function NavbarLayout({ outlet }) {
                           jd.li({}, [jd.button({ 
                             onclick: () => {
                               localStorage.removeItem('token')
-                              window.location.reload()
+                              navigate('/builder')
                             }
                           }, ["Logout"])])
                         ]

@@ -85,7 +85,10 @@ export function NavbarLayout({ outlet }) {
                               localStorage.removeItem('token')
                               navigate('/builder')
                             }
-                          }, ["Logout"])])
+                          }, [
+                            "Logout",
+                            jd.lucide('LogOut', { className: 'size-4' })
+                          ])])
                         ]
                       )
                     )
@@ -112,7 +115,10 @@ export function NavbarLayout({ outlet }) {
                 },
                 [
                   jd.li({}, [jd.a({ href: '/register' }, ["Register"])]),
-                  jd.li({}, [jd.a({ href: '/login' }, ["Login"])])
+                  jd.li({}, [jd.a({ href: '/login' }, [
+                    "Login",
+                    jd.lucide('LogIn', { className: 'size-4' })
+                  ])])
                 ]
               )
             ])

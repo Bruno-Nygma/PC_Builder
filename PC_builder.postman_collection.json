@@ -1,0 +1,686 @@
+{
+  "info": {
+    "_postman_id": "5e0f927d-c673-461c-9e99-122636be2b32",
+    "name": "PC_builder",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54037337",
+    "_collection_link": "https://go.postman.co/collection/54037337-5e0f927d-c673-461c-9e99-122636be2b32?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Get memory list",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/memory/list",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "memory",
+            "list"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Insert new memory",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"manufacturer\" : \"Gigabyte\",\n    \"model\": \"modello z\",\n    \"price\": 69.99,\n    \"form_factor\": \"DDR4\",\n    \"speed\": 2666\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/memory/new",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "memory",
+            "new"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update memory",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"form_factor\": \"test\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/memory/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "memory",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get cpu list",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/cpu/list",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "cpu",
+            "list"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Insert new cpu",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"manufacturer\": \"Intel\",\n    \"model\": \"11600k\",\n    \"price\": 239.99,\n    \"clock\": \"3.9\",\n    \"integrated_graphics\": true,\n    \"tdp\": 100,\n    \"socket\": \"FCLGA1200\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/cpu/new",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "cpu",
+            "new"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update cpu",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"clock\": \"4.0\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/cpu/7",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "cpu",
+            "7"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get cpu cooler list",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/cpu_cooler/list",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "cpu_cooler",
+            "list"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Insert new cpu cooler",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"manufacturer\": \"Thermalight\",\n    \"model\": \"Peerless Assassin 120 SE\",\n    \"price\": 34.90,\n    \"fan_rpm\": 1550,\n    \"water_cooled\": false\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/cpu_cooler/new",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "cpu_cooler",
+            "new"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get gpu list",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/gpu/list",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "gpu",
+            "list"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Insert new gpu",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"manufacturer\": \"ASUS\",\n    \"model\": \"GeForce RTX 3060 TI\",\n    \"price\": 399,\n    \"tdp\": 200,\n    \"vram\": 8\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/gpu/new",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "gpu",
+            "new"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get storage list",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/storage/list",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "storage",
+            "list"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Insert new storage",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"manufacturer\": \"Kingston\",\n    \"model\": \"NV3\",\n    \"price\": 80,\n    \"capacity\": \"512GB\",\n    \"storage_type\": \"SSD\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/storage/new",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "storage",
+            "new"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update storage",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"capacity\": \"2TB\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/storage/11",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "storage",
+            "11"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get psu list",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/psu/list",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "psu",
+            "list"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Insert new psu",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"manufacturer\": \"MSI\",\n    \"model\": \"MAG A750GL\",\n    \"price\": 86.99,\n    \"wattage\": 750\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/psu/new",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "psu",
+            "new"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update psu",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"model\": \"MAG 850AGL\",\n    \"wattage\": 850\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/psu/14",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "psu",
+            "14"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Insert new case",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"manufacturer\": \"Fractal Design\",\n    \"price\": 199.99,\n    \"model\": \"Terra\",\n    \"case_type\": \"Mini ITX\",\n    \"max_video_card_length\": 322\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/tower_case/new",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "tower_case",
+            "new"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get case list",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/tower_case/list",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "tower_case",
+            "list"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update case",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"price\": 72.99\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/tower_case/15",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "tower_case",
+            "15"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get mobo list",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/mobo/list",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "mobo",
+            "list"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Insert new mobo",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"manufacturer\": \"MSI\",\n    \"model\": \"MAG TOMAHAWK\",\n    \"price\": 199.99,\n    \"form_factor\": \"ATX\",\n    \"socket\": \"AM5\",\n    \"chipset\": \"AMD B850\",\n    \"memory_type\": \"DDR5\",\n    \"memory_slots\": 4,\n    \"pcie_slots\": 3\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/mobo/new",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "mobo",
+            "new"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update mobo",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"socket\": \"AM4\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/mobo/17",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "mobo",
+            "17"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"Bruno\",\n    \"surname\": \"Bucci\",\n    \"email\": \"brunobucci.moi@gmail.com\",\n    \"password\": \"Pass123!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/auth/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "auth",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"brunobucci.moi@gmail.com\",\n    \"password\": \"Pass123!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get build list",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoyLCJlbWFpbCI6ImFrc25jQGFpamNuLmNvbSIsInJvbGUiOiJ1c2VyIiwiZXhwIjoxNzgxNTA0MjUzfQ.IyBFC3nXt-a_iyItqqcPJCHcy9PyDrxO9OeNjTO7SJM",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/build/list",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "build",
+            "list"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

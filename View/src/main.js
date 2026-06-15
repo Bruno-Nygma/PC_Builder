@@ -7,13 +7,15 @@ import { DashboardPage } from "./pages/dashboard-page.js";
 import { BuilderPage } from "./pages/builder-page.js";
 import { RegisterPage } from "./pages/register-page.js";
 import { LoginPage } from "./pages/login-page.js";
+import { BuildsPage } from "./pages/builds-page.js";
 
 const routes = defineRoutes([
   {
     layout: NavbarLayout,
     children:[
       { path: '/dashboard', element: DashboardPage },
-      { path: '/builder', element: BuilderPage }
+      { path: '/builder', element: BuilderPage },
+      { path: '/builds', element: BuildsPage }
     ]
   },
   { path: '/register', element: RegisterPage },

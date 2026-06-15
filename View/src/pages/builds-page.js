@@ -35,7 +35,7 @@ export function BuildsPage() {
     function BuildCard({ build  },number) {
         return jd.div({ className: "card w-96 bg-base-100 card-lg shadow-sm" }, [
             jd.div({ className: "card-body" }, [
-                jd.h2({ className: "card-title" }, [`Build No. ${number}`]),
+                jd.h2({ className: "card-title" }, [`Build No. ${number+1}`]),
                 jd.p({}, [`${build[0]['manufacturer']} ${build[0]['model']}`,]),
                 jd.p({}, [`${build[1]['manufacturer']} ${build[1]['model']}`,]),
                 jd.p({}, [`${build[2]['manufacturer']} ${build[2]['model']}`,]),

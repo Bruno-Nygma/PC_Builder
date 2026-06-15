@@ -4,6 +4,7 @@ import { jd } from "../jd.config";
 
 
 export function BuilderPage() {
+    const token = localStorage.getItem('token')
 
     const [componentsList, setComponentsList] = createSignal([])
     const [componentType, setComponentType] = createSignal()
@@ -152,6 +153,52 @@ export function BuilderPage() {
     }
 
     return jd.div({}, [
+        jd.div({ className: 'flex justify-around my-4'}, [
+            jd.p({
+                ref: (el) => {
+                    effect(el, () => {
+                        let price = 0
+                        for(let component in buildComponents()){
+                            price += Number(buildComponents()[component]['price'])
+                        }
+                        el.replaceChildren(`Price: ${price}$`)
+                    })
+                }
+            }, []),
+            jd.p({
+                ref: (el) => {
+                    effect(el, () => {
+                        let wattage = 0
+                        if('cpu' in buildComponents()){
+                            wattage += buildComponents()['cpu']['tdp']
+                        }
+                        if('gpu' in buildComponents()){
+                            wattage += buildComponents()['gpu']['tdp']
+                        }
+                        wattage += wattage * 0.4
+                        el.replaceChildren(`Wattage: ${wattage}W`)
+                    })
+                }
+            }, []),
+            jd.button({ 
+                className: 'btn btn-success',
+                disabled: token ? false : true,
+                onclick: () => {
+                    fetch(`${import.meta.env.VITE_API_URL}/build/publish`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(build)
+                    }).then(async res => {
+                        const data = res.json()
+                        console.log('[DEBUG] data: ', data);
+                    })
+                }
+                    
+            }, ['Add to Account'])
+        ]),
         jd.div({ className: 'flex justify-around w-full' }, [
             jd.div({ className: 'w-full max-w-1/12' }, [
                 ComponentSelector("CPU", "/cpu/list", "cpu"),

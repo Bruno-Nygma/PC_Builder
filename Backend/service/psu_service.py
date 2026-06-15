@@ -13,7 +13,7 @@ def get_filtered(build):
             required_wattage += build["cpu"]["tdp"]
         if "gpu" in build:
             required_wattage += build["gpu"]["tdp"]
-        required_wattage += required_wattage * 0.5
+        required_wattage += required_wattage * 0.4
         psu_list = component_repository.get_by_type(session, Psu)
         for p in psu_list[:]:
             if p.wattage < required_wattage:

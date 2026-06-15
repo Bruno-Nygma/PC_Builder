@@ -52,9 +52,9 @@ export function NavbarLayout({ outlet }) {
             ]
           ),
         ]),
-        jd.div({ className: "mx-2 flex-1 px-2" }, [" Navbar Title"]),
+        jd.div({ className: "mx-2 flex-1 px-2" }, ["PC Builder"]),
         jd.div({ className: "hidden flex-none lg:block" }, [
-          jd.ul({ className: "menu menu-horizontal" }, [
+          jd.ul({ className: "menu menu-horizontal space-x-4" }, [
             NavbarItem({ text: 'Builder', icon: 'Wrench', href: '/builder' }),
             jd.li({
               // if user is logged, 'account' is replaced by 'builds'

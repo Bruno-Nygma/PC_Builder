@@ -39,10 +39,8 @@ export function BuilderPage() {
                 })
                     .then(async res => {
                         const components = await res.json();
-                        console.log(`[DEBUG] components:`, components)
                         setComponentsList(components)
                     })
-                console.log(`[DEBUG] componentType: ${componentType()}`);
             }
         },
             [text]
@@ -55,7 +53,6 @@ export function BuilderPage() {
             ref: (el) => {
                 effect(el, () => {
                     if (type in buildComponents()){
-                        console.log('[DEBUG] ComponentDisplayer ', buildComponents()[type]["model"]);
                         el.replaceChildren(buildComponents()[type]["model"])
                     }
                 })
@@ -64,7 +61,6 @@ export function BuilderPage() {
     }
 
     function ComponentRow({ component }) {
-        // console.log('[DEBUG] component', component);
         return jd.tr({
             ref: (el) => {
                 effect(el, () => {
@@ -98,7 +94,6 @@ export function BuilderPage() {
                                 setLoading(true)
                                 build[component["type"]] = component;
                                 setBuildComponents({...build});
-                                console.log('[DEBUG] buildComponents: ', buildComponents());
                                 setLoading(false)
                             }
                         }, [])
@@ -109,7 +104,6 @@ export function BuilderPage() {
     }
 
     function Table() {
-        console.log(`[DEBUG] componentType: ${componentType()}`);
         return jd.div({ className: `overflow-x-auto` }, [
             jd.table({ className: "table" }, [
                 jd.thead({}, [
@@ -122,7 +116,6 @@ export function BuilderPage() {
                                         .then(async res => {
                                             const blueprint = await res.json();
                                             setTableFields(blueprint);
-                                            // console.log(`[DEBUG] tableFields: `, tableFields());
                                             for (const attr in blueprint) {
                                                 el.append(
                                                     jd.th({}, [
@@ -193,7 +186,6 @@ export function BuilderPage() {
                         body: JSON.stringify(build)
                     }).then(async res => {
                         const data = res.json()
-                        console.log('[DEBUG] data: ', data);
                     })
                 }
                     

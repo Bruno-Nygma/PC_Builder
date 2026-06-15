@@ -16,9 +16,7 @@ export function NavbarLayout({ outlet }) {
     .then(async res => {
       const data = await res.json();
       const check_logged = data['result'];
-      console.log(`[DEBUG] check_logged = ${check_logged}`);
       setLogged(check_logged ? check_logged : false);
-      console.log(`[DEBUG] logged() = ${logged()}`);
     })
 
   return jd.div({ className: "drawer" }, [

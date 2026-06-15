@@ -20,8 +20,7 @@ export function BuildsPage() {
             className: 'grid grid-cols-3',
             ref: (el) => {
                 effect(el, () => {
-                    el.innerHTML = '',
-                    console.log('[DEBUG] buildsList: ', buildsList());
+                    el.innerHTML = '';
                     
                     el.append(...buildsList().map((build, index) => BuildCard({ build}, index )))
                 })

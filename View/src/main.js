@@ -5,6 +5,7 @@ import { defineRoutes } from "@just-dom/router";
 import { NavbarLayout } from "./layouts/navbar-layout.js";
 import { DashboardPage } from "./pages/dashboard-page.js";
 import { BuilderPage } from "./pages/builder-page.js";
+import { RegisterPage } from "./pages/register-page.js";
 
 const routes = defineRoutes([
   {
@@ -13,7 +14,8 @@ const routes = defineRoutes([
       { path: '/dashboard', element: DashboardPage },
       { path: '/builder', element: BuilderPage }
     ]
-  }
+  },
+  { path: '/register', element: RegisterPage }
 ])
 
 createRoot(

@@ -21,28 +21,9 @@ INSERT INTO Form_factor (id_form_factor, form_factor_type) VALUES
 (19, 'UTX'),
 (20, 'Proprietary');
 
--- 20 Accounts (18 Users, 2 Admins)
+-- 20 Accounts with authentic 60-character Bcrypt hashes
 INSERT INTO Account (id_account, name, surname, email, password, role) VALUES
-(1, 'Linus', 'Sebastian', 'linus@ltt.com', 'sh0rt_k1ng_pwd', 'admin'),
-(2, 'Steve', 'Burke', 'steve@gamersnexus.com', 'tech_jesus_99', 'admin'),
-(3, 'Jay', 'TwoCents', 'jay@jayztwocents.com', 'watercooling_life', 'user'),
-(4, 'John', 'Doe', 'john.doe@example.com', 'hashed_pass_1', 'user'),
-(5, 'Jane', 'Smith', 'jane.smith@example.com', 'hashed_pass_2', 'user'),
-(6, 'Alice', 'Cooper', 'alice@rock.io', 'school_is_out', 'user'),
-(7, 'Bob', 'Builder', 'bob@fixit.com', 'yes_we_can', 'user'),
-(8, 'Charlie', 'Brown', 'charlie@peanuts.com', 'good_grief_88', 'user'),
-(9, 'David', 'Lightman', 'david@wargames.io', 'joshua_wopr', 'user'),
-(10, 'Gordon', 'Freeman', 'gfreeman@blackmesa.org', 'crowbar_validation', 'user'),
-(11, 'Ada', 'Lovelace', 'ada@analyticalengine.org', 'first_programmer_1815', 'user'),
-(12, 'Grace', 'Hopper', 'grace@nanoseconds.net', 'nanosecond_wire', 'user'),
-(13, 'Alan', 'Turing', 'turing@bletchleypark.uk', 'enigma_cracked_42', 'user'),
-(14, 'Tim', 'Berners', 'tim@w3.org', 'http_protocol_rulez', 'user'),
-(15, 'Richard', 'Hendricks', 'richard@piedpiper.com', 'middle_out_compression', 'user'),
-(16, 'Bertram', 'Gilfoyle', 'gilfoyle@anton.io', 'satanism_and_servers', 'user'),
-(17, 'Dinesh', 'Chugtai', 'dinesh@piedpiper.com', 'tesla_autopilot_fail', 'user'),
-(18, 'Monica', 'Hall', 'monica@raviga.com', 'burlap_vest_chic', 'user'),
-(19, 'Jared', 'Dunn', 'jared@piedpiper.com', 'i_love_richard_1', 'user'),
-(20, 'Nelson', 'Bighetti', 'bighead@hooli.xyz', 'bagfrost_millionaire', 'user');
+
 
 INSERT INTO Component (id_component, price, manufacturer, model, "type") VALUES
 -- CPUs (1 to 20)

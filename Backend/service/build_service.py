@@ -21,6 +21,15 @@ def create(data):
                 build.components.append(new_component)
         return build_repository.create(session, build)
 
-def get_by_user(user_id):
+def get_by_user():
     with get_session() as session:
-        return build_repository.get_by_user(session, user_id)
+        account = account_repository.get_by_id(session, g.account_id).to_dict()
+        raw_builds = build_repository.get_by_user(session, account['id_account'])
+        final_result = []    
+        for build in raw_builds:
+            components = build_repository.get_by_id(session,build.id_build)
+
+            serialized_components = [comp.to_dict() for comp in components]
+
+            final_result.append(serialized_components)
+        return final_result

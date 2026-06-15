@@ -20,7 +20,7 @@ class Build(Base):
     components = relationship("Component", secondary=includes, back_populates="builds")
 
     def __repr__(self):
-        return f"Build(id = {self.id_build}, id_account = {self.id_account}, price = {self.price})"
+        return f"Build(id_build = {self.id_build}, id_account = {self.id_account}, price = {self.price})"
     
     def __str__(self):
         return f"{self.price}"

@@ -83,7 +83,7 @@ export function RegisterForm({ onSubmit } = {}){
                 effect(el, () => {
                     el.replaceChildren(
                         jd.lucide(loading() ? 'Loader2' : 'Save', { className: loading() ? 'size-4 animate-spin' : 'size-4' }),
-                        'Registrati'
+                        'Register'
                     )
                 })
             },

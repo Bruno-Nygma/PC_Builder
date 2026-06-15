@@ -5,8 +5,8 @@ import { jd } from "../jd.config";
 export function NavbarLayout({ outlet }) {
 
   const [logged, setLogged] = createSignal(false)
-  // const token = localStorage.getItem('token')
-  const token = 'ciao'
+  const token = localStorage.getItem('token')
+  // const token = 'ciao'
   // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxLCJlbWFpbCI6ImJydW5vYnVjY2kubW9pQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiZXhwaXJ5IjoxNzgxMTk4NDUwfQ.dcNkvyvxqO5w8AP89Erp82mIsh6AxrL7jhk6QAjDUNk"
 
   fetch(`${import.meta.env.VITE_API_URL}/auth/logged`, {
@@ -89,8 +89,8 @@ export function NavbarLayout({ outlet }) {
                   style: "position-anchor:--anchor-1",
                 },
                 [
-                  jd.li({}, [jd.a({}, ["Register"])]),
-                  jd.li({}, [jd.a({}, ["Login"])])
+                  jd.li({}, [jd.a({ href: '/register' }, ["Register"])]),
+                  jd.li({}, [jd.a({ href: '/login' }, ["Login"])])
                 ]
               )
             ])

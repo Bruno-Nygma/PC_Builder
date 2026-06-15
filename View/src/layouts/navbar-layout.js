@@ -1,13 +1,12 @@
 import { createSignal, effect } from "@just-dom/signals";
 import { jd } from "../jd.config";
+import { navigate } from "@just-dom/router";
 
 
 export function NavbarLayout({ outlet }) {
 
   const [logged, setLogged] = createSignal(false)
   const token = localStorage.getItem('token')
-  // const token = 'ciao'
-  // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxLCJlbWFpbCI6ImJydW5vYnVjY2kubW9pQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiZXhwaXJ5IjoxNzgxMTk4NDUwfQ.dcNkvyvxqO5w8AP89Erp82mIsh6AxrL7jhk6QAjDUNk"
 
   fetch(`${import.meta.env.VITE_API_URL}/auth/logged`, {
     headers: {
@@ -57,7 +56,6 @@ export function NavbarLayout({ outlet }) {
         jd.div({ className: "hidden flex-none lg:block" }, [
           jd.ul({ className: "menu menu-horizontal" }, [
             NavbarItem({ text: 'Builder', icon: 'Wrench', href: '/builder' }),
-            jd.li({}, [jd.a({}, [" Navbar Item 2"])]),
             jd.li({
               // if user is logged, 'account' is replaced by 'builds'
               ref: (el) => {
@@ -65,7 +63,33 @@ export function NavbarLayout({ outlet }) {
                   el.innerHTML = '';
                   if (logged()) {
                     el.replaceWith(
-                      NavbarItem({ text: 'Builds', icon: 'PcCase', href:'/builds' })
+                      jd.button(
+                        {
+                          popovertarget: "popover-1",
+                          style: "anchor-name:--anchor-1",
+                        },
+                        [
+                          jd.lucide("User", { className: 'size-4 inline-block' }),
+                          jd.span({}, ["Account"])
+                        ]
+                      ),
+                      jd.ul(
+                        {
+                          className: "dropdown menu w-52 rounded-box bg-base-100 shadow-sm",
+                          popover: "",
+                          id: "popover-1",
+                          style: "position-anchor:--anchor-1",
+                        },
+                        [
+                          jd.li({}, [jd.a({ href: '/builds' }, ["Builds"])]),
+                          jd.li({}, [jd.button({ 
+                            onclick: () => {
+                              localStorage.removeItem('token')
+                              window.location.reload()
+                            }
+                          }, ["Logout"])])
+                        ]
+                      )
                     )
                   }
                 })

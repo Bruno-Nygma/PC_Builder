@@ -11,6 +11,7 @@ from controller.psu_controller import psu_bp
 from controller.tower_case_controller import tower_case_bp
 from controller.mobo_controller import mobo_bp
 from controller.auth_controller import auth_bp
+from controller.build_controller import build_bp
 
 # from models.account import Account
 
@@ -26,6 +27,7 @@ app.register_blueprint(psu_bp)
 app.register_blueprint(tower_case_bp)
 app.register_blueprint(mobo_bp)
 app.register_blueprint(auth_bp)
+app.register_blueprint(build_bp)
 
 if __name__ == "__main__":
     app.run(debug = True, port = 5000)

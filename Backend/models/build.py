@@ -6,8 +6,7 @@ includes = Table(
     "includes",
     Base.metadata,
     Column("id_build", Integer, ForeignKey("build.id_build"), primary_key=True),
-    Column("id_component", Integer, ForeignKey("component.id_component"), primary_key=True),
-    Column("number", Integer, nullable=False)
+    Column("id_component", Integer, ForeignKey("component.id_component"), primary_key=True)
 )
 
 class Build(Base):
@@ -25,3 +24,10 @@ class Build(Base):
     
     def __str__(self):
         return f"{self.price}"
+    
+    def to_dict(self):
+        return {
+            'id_build': self.id_build,
+            'id_account': self.id_account,
+            'price': self.price
+        }

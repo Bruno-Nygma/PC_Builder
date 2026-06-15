@@ -3,7 +3,6 @@ from sqlalchemy import select
 from models.component import Component
 from models.tower_case import TowerCase
 from models.form_factor import FormFactor
-from models.mobo import Mobo
 
 #GET
 def get_all(session):

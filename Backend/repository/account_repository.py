@@ -9,7 +9,7 @@ def create(session, account):
     return account
 
 def get_by_id(session, user_id):
-    return session.get(user_id)
+    return session.get(Account, user_id)
 
 def get_all(session):
     return session.execute(select(Account)).scalars().all()

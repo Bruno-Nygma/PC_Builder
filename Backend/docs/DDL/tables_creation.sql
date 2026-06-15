@@ -25,7 +25,6 @@ CREATE TABLE IF NOT EXISTS Component(
 CREATE TABLE IF NOT EXISTS Includes(
 	id_build INT NOT NULL,
 	id_component INT NOT NULL,
-	number INT NOT NULL,
 	FOREIGN KEY (id_build) REFERENCES Build(id_build),
 	FOREIGN KEY (id_component) REFERENCES Component(id_component),
 	PRIMARY KEY (id_build, id_component)
